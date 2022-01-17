@@ -4,6 +4,7 @@ import com.example.myblogproject.model.RoleType;
 import com.example.myblogproject.model.User;
 import com.example.myblogproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -16,8 +17,6 @@ import java.util.function.Supplier;
 
 //html파일이 아니라 data를 리턴해주는 contraller
 @RestController
-//@ComponentScan(basePackages = {"com.myblogproject.test"})
-
 public class DummyControllerTest {
     @Autowired //의존성 주입 (DI)
     private UserRepository userRepository;
@@ -26,6 +25,17 @@ public class DummyControllerTest {
     //save함수는 id를 전달하면 해당 id에 대한 데이터가 있으면 update를 해주고
     //save함수는 id를 전달하면 해당 id에 대한 데이터가 없으면 insert를 한다.
     //email, password
+
+    @DeleteMapping("/dummy/user/{id}")
+    public String delete(@PathVariable int id){
+        try {
+            userRepository.deleteById(id);
+        }catch (EmptyResultDataAccessException e) { //세세하게 하기 귀찮으면 Exception도 가능, 정확하게 하려면 EmptyResultDataAccessException
+            return "삭제에 실패하였습니다. 해당 id는 DB에 없습니다.";
+        }
+        return "삭제되었습니다. id : "+id;
+    }
+
 
     @Transactional
     @PutMapping("/dummy/user/{id}")
@@ -76,7 +86,7 @@ public class DummyControllerTest {
             @Override
             public IllegalArgumentException get() {
                 // TODO Auto-generated method stub
-                return new IllegalArgumentException("해당 유저는 없습니다. id:" +id);
+                return new IllegalArgumentException("해당 사용자가 없습니다.");
             }
         });
         //요청 : 웹브라우저
