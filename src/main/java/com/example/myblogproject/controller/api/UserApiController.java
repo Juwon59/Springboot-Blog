@@ -12,6 +12,6 @@ public class UserApiController {
     @PostMapping("/api/user")
     public ResponseDto<Integer> save(@RequestBody User user){
         System.out.println("UserApiController : save 호출됨");
-        return new ResponseDto<Integer>(HttpStatus.OK, 1);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 }
