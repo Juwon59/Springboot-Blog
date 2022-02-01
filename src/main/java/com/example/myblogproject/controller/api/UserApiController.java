@@ -29,6 +29,7 @@ public class UserApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
+    /*
     @PostMapping("/api/user/login")
     public  ResponseDto<Integer> login(@RequestBody User user, HttpSession session){
         System.out.println("UserApiController : login 호출됨");
@@ -39,4 +40,5 @@ public class UserApiController {
         }
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
+     */
 }
