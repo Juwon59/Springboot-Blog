@@ -31,17 +31,17 @@
             <c:when test="${empty principal}">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/loginForm">login</a>
+                        <a class="nav-link" href="/auth/loginForm">login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/joinForm">join</a>
+                        <a class="nav-link" href="/auth/joinForm">join</a>
                     </li>
                 </ul>
             </c:when>
             <c:otherwise>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/board/form">글쓰기</a>
+                        <a class="nav-link" href="/board/form">글쓰기</a>  <%--글쓰기, 회원정보 로그아웃은 로그인이 된 상태에서 이용가능하기 때문에 auth 안됨 --%>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/user/form">회원정보</a>
